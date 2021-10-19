@@ -2,36 +2,60 @@ import java.util.Arrays;
 
 public class FizzBuzzWoof {
 
-    public static String[] fizzBuzzWoof(int startnumber, int endnumber) {
 
-        String[] numbers = new String[endnumber - startnumber + 1];
-        int newNumber = startnumber;
-
-        for (int i = startnumber - startnumber; i < (endnumber - startnumber + 1); i++) {
-
-            while(newNumber > 0) {
-                if(newNumber % 10 == 3) {
-                    numbers[i] = "Fizz";
-                } else if (newNumber % 10 == 5) {
-                    numbers[i] = "Buzz";
-                } else if (newNumber % 10 == 7) {
-                    numbers[i] = "Woof";
-                }
-                newNumber=newNumber/10;
+    public static boolean isDigitPresent(int a, int b) {
+        while (a > 0) {
+            if (a % 10 == b) {
+                break;
             }
-            if (newNumber % 3 == 0) {
-                numbers[i] = "Fizz";
-            } else if (newNumber % 5 == 0) {
-                numbers[i] = "Buzz";
-            } else if (newNumber % 7 == 0) {
-                numbers[i] = "Woof";
-            } else {numbers[i] = String.valueOf(newNumber);
-
-            }
-            newNumber += 1;
+            a /= 10;
         }
-        System.out.println(Arrays.toString(numbers));
 
-        return numbers;
+        return a > 0;
+    }
+
+    public static String fizzBuzzWoofNumber(int a) {
+
+        String result = "";
+
+        if (a % 3 == 0) {
+            result += "Fizz";
+        }
+        if (FizzBuzzWoof.isDigitPresent(a, 3)) {
+            result += "Fizz";
+        }
+        if (a % 5 == 0) {
+            result += "Buzz";
+        }
+        if (FizzBuzzWoof.isDigitPresent(a, 5)) {
+            result += "Buzz";
+        }
+        if (a % 7 == 0) {
+            result += "Woof";
+        }
+        if (FizzBuzzWoof.isDigitPresent(a, 7)) {
+            result += "Woof";
+        }
+
+        return result;
+    }
+
+    public static String[] getFizzBuzzWoof(int n) {
+        String[] array = new String[n];
+        String result = "";
+
+        for (int i = 0; i < array.length; i++) {
+            String text = FizzBuzzWoof.fizzBuzzWoofNumber(i + 1);
+            if (text.equals("")) {
+                result = Integer.toString(i + 1);
+            } else {
+                result = text;
+            }
+            array[i] = result;
+        }
+
+        System.out.println(Arrays.toString(array));
+
+        return array;
     }
 }
